@@ -2,8 +2,7 @@ name: Docker Image Push to GHCR
 
 on:
   push:
-    branches:
-      - 'main'
+    branches: [ "main" ]
 
 jobs:
   push:
