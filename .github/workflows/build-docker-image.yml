@@ -2,9 +2,9 @@ name: Docker Image Build
 
 on:
   push:
-    branches: [ "*" ]
+    branches: [ "*" , "!mian" ]
   pull_request:
-    branches: [ "*" ]
+    branches: [ "*" , "!mian"]
 
 jobs:
   build:
@@ -23,4 +23,5 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
       - name: Build Docker Image
         run: |
-          docker build . --tag ghcr.io/${{ github.repository_owner }}/docker-xserver-ghcr:temp
+          REPO_NAME=$(echo "${{ github.repository }}" | awk -F '/' '{print $2}' | tr '[:upper:]' '[:lower:]')
+          docker build . --tag ghcr.io/${{ github.repository_owner }}/$REPO_NAME:temp
