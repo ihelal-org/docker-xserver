@@ -17,10 +17,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_PAT }}
-      - name: Pull, tag, and push Docker Image
+      - name: Build and push Docker Image
         run: |
-          TEMP_IMAGE=ghcr.io/${{ github.repository_owner }}/docker-xserver-ghcr:temp
-          LATEST_IMAGE=ghcr.io/${{ github.repository_owner }}/docker-xserver-ghcr:latest
-          docker pull $TEMP_IMAGE
-          docker tag $TEMP_IMAGE $LATEST_IMAGE
-          docker push $LATEST_IMAGE
+          docker build . --tag ghcr.io/${{ github.repository_owner }}/docker-xserver-ghcr:latest
+          docker push ghcr.io/${{ github.repository_owner }}/docker-xserver-ghcr:latest
